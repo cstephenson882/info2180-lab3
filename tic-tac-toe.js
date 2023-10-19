@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   let myText = document.createTextNode("X");
                   child.append(myText);
                   switch_ = 0;
-                  state_[index] = 1;
+                  state_[index] = 1 ;
               }
               
               
