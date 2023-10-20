@@ -34,6 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
               
               
           });
+
+            child.addEventListener('mouseover',function(){
+                child.classList.add('hover');
+            
+            });
+
+            child.addEventListener('mouseout',function(){
+                child.classList.remove('hover');
+                
+            });
     });
 
         
