@@ -1,15 +1,5 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//    const boardParent = document.querySelector('#board');
-//    //var children_of_board = boardParent.children;
-//    for (let i = 0; i < boardParent.children.length;i++) {
-//     const childElement = boardParent.children[i];
-//     childElement.setAttribute('class', 'square');
-
-//    }
-// }); 
-
-
-// on load this event run to load the sqaures
+//**************************** */
+//stop~
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -42,6 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
             status_.textContent = text_;
             status_.setAttribute('id','status');
             status_.classList.add('you-won');
+            var boardElement = document.querySelector('#board');
+            var boardChildren = boardElement.children;
+
+            Array.from(boardChildren).forEach(function(child){ 
+                if (child.textContent == ""){
+                    child.textContent =" ";
+                }
+                //child.removeEventListener('click');
+            });
             
         }
         else if (check_ == 1) {
@@ -50,6 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
             status_.textContent = text_;
             status_.setAttribute('id','status');
             status_.classList.add('you-won');
+            var boardElement = document.querySelector('#board');
+            var boardChildren = boardElement.children;
+
+            Array.from(boardChildren).forEach(function(child){
+                if (child.textContent == ""){
+                    child.textContent =" ";
+                }
+                //child.removeEventListener('click');
+            });
 
         }
     
@@ -66,27 +74,36 @@ document.addEventListener('DOMContentLoaded', function () {
     Array.from(boardChildren).forEach(function(child) {
         child.classList.add('square');
         
-
+        var clickedDiv = child.target;
         child.addEventListener('click', function() {
-          var index = Array.from(boardChildren).indexOf(child);
-          //console.log(`Square ${index} clicked!`);
+            var index = Array.from(boardChildren).indexOf(child);
+            
+            //console.log(`Square ${index} clicked!`);
             // Your code to handle the click event goes here
 
             // Add the "O" class only to the clicked square
-            if (switch_ == 0) {
-                child.classList.add('O');
-                let myText = document.createTextNode("O");
-                child.append(myText);
-                switch_= 1;
-                state_[index] = 0;
-                //child.style.backgroundColor = 'yellow';
-            } else{
-                child.classList.add('X');
-                let myText = document.createTextNode("X");
-                child.append(myText);
-                switch_ = 0;
-                state_[index] = 1;
+            if (child.textContent == "") {
+                if (switch_ == 0) {
+                    child.classList.add('O');
+                    let myText = document.textContent = "O";
+                    child.textContent = myText;
+                    switch_= 1;
+                    state_[index] = 0;
+                    //child.style.backgroundColor = 'yellow';
+                    // child.removeEventListener('click');
+                    // child.classList.remove('hover');
+                    // child.removeEventListener('mouseover');
+                } else{
+                    child.classList.add('X');
+                    let myText = document.textContent = "X";
+                    child.textContent = myText;
+                    switch_ = 0;
+                    state_[index] = 1;
+                    boardChildren[index].classList.remove('hover');
+                }
+            
             }
+            
             //console.log(Array.from(state_));
             checkWin(child); 
             
@@ -95,7 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         child.addEventListener('mouseover',function(){
-            child.classList.add('hover');
+            if (child.textContent == "") {
+                child.classList.add('hover');
+            }
             
         });
 
@@ -127,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         
     });
-    
+
 });
   
 
